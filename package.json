@@ -1,0 +1,30 @@
+{
+    "name": "mean-ang-2",
+    "version": "1.0.0",
+    "description": "Mean Stack with Angular 2",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Ingeborg2/Mean-Stack-Angular.git"
+    },
+    "keywords": [
+        "Mean",
+        "Stack",
+        "Angular",
+        "2",
+        "application"
+    ],
+    "author": "Ingeborg",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Ingeborg2/Mean-Stack-Angular/issues"
+    },
+    "homepage": "https://github.com/Ingeborg2/Mean-Stack-Angular#readme",
+    "dependencies": {
+        "express": "^4.16.2",
+        "mongoose": "^4.13.4"
+    }
+}
