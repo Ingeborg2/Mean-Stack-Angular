@@ -1,0 +1,31 @@
+span.purple {
+    color: #552c78;
+}
+
+span.purple:hover {
+    color: #e38325;
+}
+
+.btn-default {
+    color: #2e0c4a;
+    background-color: #FFF;
+    border-color: #2e0c4a;
+}
+
+.btn-primary {
+    color: #FFF;
+    background-color: #552c78;
+    border-color: #2e0c4a;
+}
+
+.btn-default:hover {
+    background-color: #d3bde5;
+}
+
+.btn-primary:hover {
+    background-color: #2e0c4a;
+}
+
+img.gemstones-home {
+    width: 40%;
+}
