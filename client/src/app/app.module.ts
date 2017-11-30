@@ -3,19 +3,21 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from './services/auth.service';
 import { FlashMessagesModule } from 'ngx-flash-messages';
 import { HttpModule, Headers } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { GemstonesComponent } from './components/gemstones/gemstones.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AuthService } from './services/auth.service';
+import { GemsService } from './services/gems.service';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
+import { AddGemsComponent } from './components/add-gems/add-gems.component';
 
 
 @NgModule({
@@ -23,10 +25,11 @@ import { NotAuthGuard } from './guards/notAuth.guard';
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    DashboardComponent,
+    GemstonesComponent,
     RegisterComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    AddGemsComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { NotAuthGuard } from './guards/notAuth.guard';
   ],
   providers: [
     AuthService,
+    GemsService,
     AuthGuard,
     NotAuthGuard
   ],

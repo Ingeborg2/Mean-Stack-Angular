@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const config = require('./config/db');
 const path = require('path');
 const authentication = require('./routes/authentication.js')(router);
+const gems = require('./routes/gems.js')(router);
 const cors = require('cors');
 
 
@@ -20,13 +21,16 @@ mongoose.connect(config.uri, { useMongoClient: true }, (err) => {
 });
 
 //Middleware for CORS - ONLY for development environment - once you go in production, everything will be running in one domain
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:4200'
+}));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + './../client/dist'));
 app.use('/authentication', authentication);
+app.use('/gems', gems);
 
 // path description from server (backend) to index.html file in angular app (frontend)
 app.get('*', (req, res) => {

@@ -3,8 +3,9 @@
     <h1>Welcome to the <span class="purple">Gems Store</span></h1>
 
     <div>
-        <a routerLink="/register" class="btn btn-primary">Register</a>
-        <a routerLink="/login" class="btn btn-default">Login</a>
+        <a *ngIf="!authService.loggedIn()" routerLink="/register" class="btn btn-primary">Register</a>
+        <a *ngIf="!authService.loggedIn()" routerLink="/login" class="btn btn-default">Login</a>
+        <a *ngIf="authService.loggedIn()" routerLink="/gemstones" class="btn btn-success">View Gemstones</a>
     </div>
 </div>
 
