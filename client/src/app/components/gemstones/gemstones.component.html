@@ -7,7 +7,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th (click)="sortBy(this.gemstones, this.gemstones[i].name)" let i=index>NAME</th>
+            <th (click)="sortBy(gemstones, name)">NAME</th>
             <th>SPARKLE</th>
             <th>PRICE</th>
             <th>FOR SALE</th>
@@ -20,8 +20,8 @@
     </thead>
 
     <tbody>
-        <!-- <pre>{{ edelstenen | json }}</pre>-->
-        <ng-container *ngFor="let gem of gemstones">
+        <!-- <pre>{{ gemstones[0].name | json }}</pre> -->
+        <ng-container *ngFor="let gem of gemstones; let i=index">
             <tr>
                 <td>{{ gem.name }}</td>
                 <td>{{ gem.sparkle }}</td>

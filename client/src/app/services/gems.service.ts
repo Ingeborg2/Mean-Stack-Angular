@@ -3,7 +3,6 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
 import "rxjs/add/operator/map";
 
 @Injectable()
