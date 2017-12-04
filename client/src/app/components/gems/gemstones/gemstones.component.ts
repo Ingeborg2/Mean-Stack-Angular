@@ -1,9 +1,8 @@
 import { Component, OnInit, Pipe } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { GemsService } from '../../services/gems.service';
-import { Gem } from '../../gem';
-import 'rxjs/add/operator/map';
+import { GemsService } from '../../../services/gems.service';
+import { AuthService } from '../../../services/auth.service';
+import { Gem } from '../../../gem';
 
 
 @Component({
@@ -14,25 +13,23 @@ import 'rxjs/add/operator/map';
 export class GemstonesComponent implements OnInit {
   gemstones;
   loadingGems = false;
-  name;
-  
+  isDesc;
+  username;
+  createdOn;
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private gemsService: GemsService
+    private gemsService: GemsService,
+    private authService: AuthService
   ) { }
 
-  sortBy(array, field) {
-    array.sort(function (a, b) {
-      if (a.field < b.field) {
-        return -1;
-      } else if (a.field > b.field) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
+
+  sortBy(field) {
+    this.gemstones.sort((a,b) => a[field] > b[field] ? 1 : a[field] < b[field] ? -1 : 0);
+    this.isDesc = !this.isDesc; //change the direction    
+    if(!this.isDesc){
+      this.gemstones.sort((a,b) => a[field] > b[field] ? 1 : a[field] < b[field] ? -1 : 0).reverse();
+    }
   }
 
   reloadGems() {
@@ -47,17 +44,16 @@ export class GemstonesComponent implements OnInit {
     // GET ALL GEMSTONES FROM DATABASE
     this.gemsService.getAllGems().subscribe(data => {
       this.gemstones = data.gems; // Assign array to use in HTML
-      this.name = this.gemstones.map(a => a.name);
-      console.log(this.name);
-      //console.log('data: ', data) // data = object with success and gems array
     });
-    
   }
 
   ngOnInit() {
+    this.gemsService.createdOn.subscribe(createdOn => this.createdOn = createdOn);
     this.getAllGems();
+    this.authService.getProfile().subscribe(profile => {
+      this.username = profile.user.username; 
+    });
     
-
   }
 
 }

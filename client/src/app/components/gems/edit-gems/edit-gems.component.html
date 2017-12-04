@@ -1,0 +1,47 @@
+<h1 class="page-header">Edit Blog</h1>
+
+<!-- Custom Success/Erro Message -->
+<div class="row show-hide-message" *ngIf="message">
+    <div [ngClass]="messageClass">
+        {{ message }}
+    </div>
+</div>
+
+<p>FORM: {{ form.value | json }}</p>
+
+<!-- Edit Gemstone Form -->
+<form [formGroup]="form" (ngSubmit)="updateGem(form.value)" *ngIf="loading">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" formControlName="name" />
+        <div class="required" *ngIf="!form.get(['name']).valid && form.get(['name']).dirty">Name is required.</div>
+    </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" formControlName="price" />
+        <div class="required" *ngIf="!form.get(['price']).valid && form.get(['price']).dirty">Price is required.</div>
+    </div>
+    <div class="form-group">
+        <label for="forSale">For sale</label>
+        <input type="checkbox" formControlName="forSale" />
+    </div>
+    <div class="form-group">
+        <label for="soldOut">Sold out</label>
+        <input type="checkbox" formControlName="soldOut" />
+    </div>
+    <div class="form-group">
+        <label for="selSparkle">Sparkle</label>
+        <select id="sparkle" class="form-control" required formControlName="sparkle">
+     <option *ngIf="!form.get(['sparkle']).valid" value="" disabled="true" [selected]="!sparkle">-- Select sparkle --</option>
+     <option *ngFor="let sparkle of sparkles" [value]="sparkle" >{{ sparkle }}</option>
+  </select>
+        <div class="required" *ngIf="!form.get(['sparkle']).valid && form.get(['sparkle']).dirty">Sparkle is required.</div>
+
+    </div>
+    <div>
+        <button class="btn btn-primary" type="submit" [disabled]="processing || !form.valid">UPDATE GEM</button>
+
+    </div>
+    <!--<p>FORM: {{ voegEdelsteenToeForm.value | json }}</p>
+    <p>Form status: {{ voegEdelsteenToeForm.status | json }}</p>-->
+</form>

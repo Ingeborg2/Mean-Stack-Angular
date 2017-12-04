@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { GemsService } from '../../services/gems.service';
-import { Gem } from '../../gem';
+import { AuthService } from '../../../services/auth.service';
+import { GemsService } from '../../../services/gems.service';
+import { Gem } from '../../../gem';
 
 @Component({
   selector: 'app-add-gems',
@@ -59,6 +59,8 @@ export class AddGemsComponent {
       this.form.get('updatedOn').value,
     )
     this.createdOn = this.gemsService.getCreatedOn(this.form.get('createdOn').value);
+    this.form.reset({forSale: '', soldOut:'', createdOn: new Date()});
+    console.log(this.createdOn)
     // Save gem into database
     this.gemsService.newGem(gem).subscribe(data => {
       // Check if gemstone was saved to database or not

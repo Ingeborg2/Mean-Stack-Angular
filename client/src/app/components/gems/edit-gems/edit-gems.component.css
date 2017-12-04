@@ -1,0 +1,12 @@
+.required {
+    color: #e38325;
+}
+
+label {
+    width: 8%;
+}
+
+select {
+    display: inline;
+    width: 16%;
+}

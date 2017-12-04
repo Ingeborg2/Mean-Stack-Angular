@@ -9,15 +9,17 @@ import { HttpModule, Headers } from '@angular/http';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
-import { GemstonesComponent } from './components/gemstones/gemstones.component';
-import { RegisterComponent } from './components/register/register.component';
-import { LoginComponent } from './components/login/login.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { GemstonesComponent } from './components/gems/gemstones/gemstones.component';
+import { RegisterComponent } from './components/users/register/register.component';
+import { LoginComponent } from './components/users/login/login.component';
+import { ProfileComponent } from './components/users/profile/profile.component';
 import { AuthService } from './services/auth.service';
 import { GemsService } from './services/gems.service';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
-import { AddGemsComponent } from './components/add-gems/add-gems.component';
+import { AddGemsComponent } from './components/gems/add-gems/add-gems.component';
+import { DeleteGemsComponent } from './components/gems/delete-gems/delete-gems.component';
+import { EditGemsComponent } from './components/gems/edit-gems/edit-gems.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { AddGemsComponent } from './components/add-gems/add-gems.component';
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
-    AddGemsComponent
+    AddGemsComponent,
+    DeleteGemsComponent,
+    EditGemsComponent
   ],
   imports: [
     BrowserModule,

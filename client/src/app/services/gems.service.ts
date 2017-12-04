@@ -9,7 +9,7 @@ import "rxjs/add/operator/map";
 export class GemsService {
   domain = this.authService.domain;
   options;
-  gemstones;
+  gemstones; 
 
   private createdOnSubject = new BehaviorSubject<Array<any>>([]);
     createdOn = this.createdOnSubject.asObservable();
@@ -31,7 +31,7 @@ export class GemsService {
     return stars;
   }  
 
-  // METHOD TO CREATING HEADERS
+  // METHOD TO CREATE HEADERS
   createAuthenticationHeaders(){
     this.authService.loadToken();
     this.options = new RequestOptions({
@@ -42,7 +42,7 @@ export class GemsService {
     })
   }
 
-  // METHOD TO CREATING NEW GEM
+  // METHOD TO CREATE NEW GEM
   newGem(gemstone) {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.post(this.domain + '/gems/newGem', gemstone, this.options)
@@ -64,9 +64,10 @@ export class GemsService {
   }
 
   // METHOD TO UPDATE A GEM
-  editGem(gemstone) {
+  editGem(id, updatedGemstone) {
+    let updatedGemstoneString = JSON.stringify(updatedGemstone);
     this.createAuthenticationHeaders();
-    return this.http.put(this.domain + '/gems/updateGem/', gemstone, this.options)
+    return this.http.put(this.domain + '/gems/updateGem/' + id , updatedGemstoneString, this.options)
       .map(res => res.json());
   }
 

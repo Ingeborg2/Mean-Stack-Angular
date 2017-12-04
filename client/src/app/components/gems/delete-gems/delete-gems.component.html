@@ -1,0 +1,58 @@
+<h1 class="page-header">Delete Gemstone</h1>
+
+<!-- Custom Success/Error Message -->
+<div class="row show-hide-message" *ngIf="message">
+    <div [ngClass]="messageClass">
+        {{ message }}
+    </div>
+</div>
+
+<!-- Modal Confirmation Window -->
+<div class="col-md-6" *ngIf="loading">
+    <!-- Model Outer Layer -->
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <!-- Close Button -->
+            <button type="button" name="button" class="close" data-dismiss="modal">&times;</button>
+            <!-- Modal Title -->
+            <h4 class="modal-title">Confirm</h4>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+            <p>Are you sure you would like to delete this gemstone?</p>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+            <!-- Yes Button -->
+            <button [disabled]="processing" type="button" name="button" class="btn btn-success" (click)="deleteGem()">Yes</button>
+            <!-- No Button -->
+            <a routerLink="/gemstones"><button [disabled]="processing" type="button" name="button" class="btn btn-danger">No</button></a>
+        </div>
+    </div>
+
+    <!-- Panel -->
+    <div class="panel panel-primary">
+        <!-- Panel Heading -->
+        <div class="panel-heading">
+            <!-- Panel Title -->
+            <h3 class="panel-title">{{ gemstone.name }}</h3>
+        </div>
+
+        <!-- Panel Body -->
+        <div class="panel-body">
+            <p>Price: {{ gemstone.price }}</p>
+            <p>Sparkle: {{ gemstone.sparkle }}</p>
+        </div>
+
+        <!-- Panel Footer -->
+        <div class="panel-footer">
+            <strong>Created by: </strong> {{ gemstone.createdBy }}
+            <br />
+            <strong>Date: </strong> {{ gemstone.createdOn | date:'dd/MM/yyyy' }}
+        </div>
+    </div>
+
+</div>

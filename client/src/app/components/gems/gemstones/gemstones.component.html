@@ -1,0 +1,49 @@
+<h1 class="page-header">Gemstones</h1>
+
+<button [disabled]="loadingGems" type="button" name="button" class="btn btn-info pull-right reload" (click)="reloadGems()">
+    <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>&nbsp;&nbsp;Reload
+</button>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th (click)="sortBy('name')">NAME</th>
+            <th (click)="sortBy('sparkle')">SPARKLE</th>
+            <th (click)="sortBy('price')">PRICE</th>
+            <th>FOR SALE</th>
+            <th (click)="sortBy('createdBy')">CREATED BY</th>
+            <th (click)="sortBy('createdOn')">CREATED ON</th>
+            <th (click)="sortBy('updatedOn')">UPDATED ON</th>
+            <th>ACTION</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <!-- <pre>{{ gemstones[0].name | json }}</pre> -->
+        <ng-container *ngFor="let gem of gemstones">
+            <tr>
+                <td>{{ gem.name }}</td>
+                <td>{{ gem.sparkle }}</td>
+                <td>{{ gem.price | currency:'EUR':'symbol':'1.2-2' }}</td>
+                <td><button *ngIf="gem.forSale">BUY</button></td>
+                <td>{{ gem.createdBy }}</td>
+                <td>{{ gem.createdOn | date:'dd/MM/yyyy' }}</td>
+                <td *ngIf="gem.updatedOn === null"></td>
+                <td *ngIf="gem.updatedOn !== null">{{ gem.updatedOn | date:'dd/MM/yyyy' }}</td>
+                <td>
+                    <a [routerLink]="['/deleteGem/', gem._id]" *ngIf="username == gem.createdBy">
+                        <button type="button" name="delete-button" class="btn btn-sm btn-danger">DELETE</button>
+                    </a>
+                </td>
+                <td>
+                    <a [routerLink]="['/updateGem/', gem._id]" *ngIf="username == gem.createdBy">
+                        <button type="button" name="edit-button" class="btn btn-sm btn-primary">EDIT</button>
+                    </a>
+                </td>
+            </tr>
+        </ng-container>
+
+    </tbody>
+</table>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
-import { AuthGuard } from '../../guards/auth.guard';
+import { AuthGuard } from '../../../guards/auth.guard';
 
 @Component({
   selector: 'app-login',
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
         if(this.previousUrl){
           this.router.navigate([this.previousUrl])
         } else {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/gemstones']);
         }
       }, 2000 )
     }

@@ -107,7 +107,7 @@ module.exports = function(router) {
                                 } else {
                                     // Check if the user who requested single blog is the one who created it
                                     if (user.username !== gems.createdBy) {
-                                        res.json({ success: false, message: 'You are not authorized to edit this gemstone.' });
+                                        res.json({ success: false, message: 'You are not authorized to edit or delete this gemstone.' });
                                     } else {
                                         res.json({ success: true, gems: gems }); // Return success and the gemstone
                                     }
@@ -122,13 +122,13 @@ module.exports = function(router) {
 
     // UPDATE GEMSTONE
 
-    router.put('/updateGem', (req, res) => {
+    router.put('/updateGem/:id', (req, res) => {
         // Check if id was provided
-        if (!req.body.id) {
+        if (!req.params.id) {
             res.json({ success: false, message: 'No gemstone id provided' });
         } else {
             // Check if id exists in database
-            Gems.findOne({ _id: req.body._id }, (err, gems) => {
+            Gems.findOne({ _id: req.params.id }, (err, gems) => {
                 // Check if id is a valid ID
                 if (err) {
                     res.json({ success: false, message: 'Not a valid gemstone id' });
@@ -141,36 +141,36 @@ module.exports = function(router) {
                         User.findOne({ _id: req.decoded.userId }, (err, user) => {
                             // Check if error was found
                             if (err) {
-                                res.json({ success: false, message: err });
+                                res.json({ success: false, message: err }); // Return error message
                             } else {
-                                // Check if user was found in the database
+                                // Check if user's id was found in database
                                 if (!user) {
-                                    res.json({ success: false, message: 'Unable to authenticate user.' });
+                                    res.json({ success: false, message: 'Unable to authenticate user.' }); // Return error message
                                 } else {
-                                    // Check if user that is logged in, is the the user that created the gemstone, that he/she wants to update
+                                    // Check if user attempting to delete gemstone is the same user who originally created the gemstone
                                     if (user.username !== gems.createdBy) {
-                                        res.json({ success: false, message: 'You are not authorized to edit this gemstone.' });
+                                        res.json({ success: false, message: 'You are not authorized to delete this gemstone.' }); // Return error message
                                     } else {
-                                        name = req.body.name;
-                                        price = req.body.price;
-                                        forSale = req.body.forSale;
-                                        soldOut = req.body.soldOut;
-                                        sparkle = req.body.sparkle;
-                                        createdBy = req.body.createdBy;
-                                        createdOn = req.body.createdOn;
-                                        updatedOn = req.body.updatedOn;
+                                        gems.name = req.body.name,
+                                            gems.price = req.body.price,
+                                            gems.forSale = req.body.forSale,
+                                            gems.soldOut = req.body.soldOut,
+                                            gems.sparkle = req.body.sparkle,
+                                            gems.createdBy = req.body.createdBy,
+                                            gems.createdOn = req.body.createdOn,
+                                            gems.updatedOn = req.body.updatedOn,
 
-                                        gems.save((err) => {
-                                            if (err) {
-                                                if (err.errors) {
-                                                    res.json({ success: false, message: 'Please ensure form is filled out properly' });
+                                            gems.save((err) => {
+                                                if (err) {
+                                                    if (err.errors) {
+                                                        res.json({ success: false, message: 'Please ensure form is filled out properly', err });
+                                                    } else {
+                                                        res.json({ success: false, message: err });
+                                                    }
                                                 } else {
-                                                    res.json({ success: false, message: err });
+                                                    res.json({ success: true, message: 'Gems successfully updated!' });
                                                 }
-                                            } else {
-                                                res.json({ success: true, message: 'Gems successfully updated!' });
-                                            }
-                                        });
+                                            });
                                     }
                                 }
                             }
@@ -198,7 +198,7 @@ module.exports = function(router) {
                     if (!gems) {
                         res.json({ success: false, messasge: 'Gemstone was not found' }); // Return error message
                     } else {
-                        // Get info on user who is attempting to delete post
+                        // Get info on user who is attempting to delete gemstone
                         User.findOne({ _id: req.decoded.userId }, (err, user) => {
                             // Check if error was found
                             if (err) {
@@ -208,11 +208,11 @@ module.exports = function(router) {
                                 if (!user) {
                                     res.json({ success: false, message: 'Unable to authenticate user.' }); // Return error message
                                 } else {
-                                    // Check if user attempting to delete blog is the same user who originally posted the blog
+                                    // Check if user attempting to delete gemstone is the same user who originally created the gemstone
                                     if (user.username !== gems.createdBy) {
-                                        res.json({ success: false, message: 'You are not authorized to delete this gemstone post' }); // Return error message
+                                        res.json({ success: false, message: 'You are not authorized to delete this gemstone.' }); // Return error message
                                     } else {
-                                        // Remove the blog from database
+                                        // Remove the gemstone from database
                                         gems.remove((err) => {
                                             if (err) {
                                                 res.json({ success: false, message: err }); // Return error message
