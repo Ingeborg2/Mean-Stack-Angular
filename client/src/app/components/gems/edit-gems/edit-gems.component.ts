@@ -11,7 +11,7 @@ import { Gem } from '../../../gem';
 })
 export class EditGemsComponent implements OnInit {
   form;
-  createdOn;
+  gemstones: Gem[];
   sparkles = [1, 2, 3, 4];
   sparkle;
   currentUrl;
@@ -37,7 +37,7 @@ export class EditGemsComponent implements OnInit {
       soldOut: [''],
       sparkle: ['', Validators.required],
       createdBy: [''],
-      createdOn: [this.createdOn],
+      createdOn: [''],
       updatedOn: [new Date()],
     });
   }
@@ -64,9 +64,8 @@ export class EditGemsComponent implements OnInit {
   }
 
 
-  ngOnInit() {    
-    this.gemsService.createdOn.subscribe(createdOn => this.createdOn = createdOn);
-    console.log('waarde is: ', this.createdOn)
+  ngOnInit() { 
+    this.gemsService.gems.subscribe(gemstones => this.gemstones = gemstones)   
     this.currentUrl = this.activatedRoute.snapshot.params; // When component loads, grab the id
     // Function to GET current gemstone with id in params
     this.gemsService.getSingleGem(this.currentUrl.id).subscribe(data => {      
@@ -81,11 +80,12 @@ export class EditGemsComponent implements OnInit {
           this.form.get('soldOut').setValue(data.gems.soldOut);
           this.sparkle = this.form.get('sparkle').setValue(data.gems.sparkle.length);
           this.form.get('createdBy').setValue(data.gems.createdBy);
-          this.form.get('createdOn').setValue(this.createdOn);
+          this.form.get('createdOn').setValue(data.gems.createdOn);
           this.form.get('updatedOn').setValue(new Date());
           //data.gems = this.form.value;
         }
         this.loading = true; // Allow loading of edit form
       });
   }
+
 }
