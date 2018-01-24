@@ -39,7 +39,7 @@ export class AddGemsComponent {
       sparkle: ['', Validators.required],
       createdBy: [''],
       createdOn: [new Date()],
-      updatedOn: [new Date("00/00/0000")],
+      updatedOn: [null],
     })
   }
 
@@ -59,8 +59,8 @@ export class AddGemsComponent {
       this.form.get('updatedOn').value,
     )
     this.createdOn = this.gemsService.getCreatedOn(this.form.get('createdOn').value);
+    console.log("wat bewaren we in createdOn?", this.form.get('createdOn').value )
     this.form.reset({forSale: '', soldOut:'', createdOn: new Date()});
-    console.log(this.createdOn)
     // Save gem into database
     this.gemsService.newGem(gem).subscribe(data => {
       // Check if gemstone was saved to database or not

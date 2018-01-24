@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'ngx-flash-messages';
 import { HttpModule, Headers } from '@angular/http';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -40,7 +41,8 @@ import { EditGemsComponent } from './components/gems/edit-gems/edit-gems.compone
     AppRoutingModule,
     ReactiveFormsModule,
     FlashMessagesModule,
-    HttpModule
+    HttpModule,
+    AngularFontAwesomeModule
   ],
   providers: [
     AuthService,

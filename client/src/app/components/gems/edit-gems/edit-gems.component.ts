@@ -65,7 +65,10 @@ export class EditGemsComponent implements OnInit {
 
 
   ngOnInit() {    
-    this.gemsService.createdOn.subscribe(createdOn => this.createdOn = createdOn);
+    this.gemsService.createdOn.subscribe((createdOn) => {
+      this.createdOn = createdOn;
+      console.log("final test: ", this.createdOn)
+    });
     console.log('waarde is: ', this.createdOn)
     this.currentUrl = this.activatedRoute.snapshot.params; // When component loads, grab the id
     // Function to GET current gemstone with id in params
