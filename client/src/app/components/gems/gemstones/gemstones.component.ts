@@ -44,8 +44,7 @@ export class GemstonesComponent implements OnInit {
     let value = idAttr.nodeValue; 
 
     if(this.isClickedId === undefined || null) {
-      this.isAsc = true; 
-      console.log("isAsc1: ", this.isAsc)     
+      this.isAsc = true;   
     } else if (this.isClickedId === idAttr) {
       this.isAsc = !this.isAsc; //change the direction
     } else {
