@@ -8,15 +8,14 @@ import "rxjs/add/operator/map";
 @Injectable()
 export class GemsService {
   domain = this.authService.domain;
-  options;
-  gemstones; 
+  options; 
 
-  private createdOnSubject = new BehaviorSubject<Array<any>>([]);
-    createdOn = this.createdOnSubject.asObservable();
+  private edelstenenSubject = new BehaviorSubject<Array<any>>([]);
+    gems = this.edelstenenSubject.asObservable();
 
-  getCreatedOn(createdOn) {
-    this.createdOnSubject.next(createdOn);
-  }  
+  changeEdelstenen(gems) {
+    this.edelstenenSubject.next(gems);
+  }   
 
   constructor(
     private authService: AuthService,

@@ -11,7 +11,7 @@ import { Gem } from '../../../gem';
   styleUrls: ['./gemstones.component.css']
 })
 export class GemstonesComponent implements OnInit {
-  gemstones;
+  gemstones: Gem[];
   loadingGems = false;
   isAsc = true;
   username;
@@ -105,7 +105,7 @@ export class GemstonesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.gemsService.createdOn.subscribe(createdOn => this.createdOn = createdOn);
+    this.gemsService.gems.subscribe(gemstones => this.gemstones = gemstones)
     this.getAllGems();
     this.authService.getProfile().subscribe(profile => {
       this.username = profile.user.username; 
