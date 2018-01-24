@@ -13,7 +13,6 @@ import { Gem } from '../../../gem';
 })
 export class AddGemsComponent {
   form;
-  gemstones: Gem[];
   sparkles = [1, 2, 3, 4];
   processing = false;
   message;
@@ -59,15 +58,12 @@ export class AddGemsComponent {
       this.form.get('createdOn').value,
       this.form.get('updatedOn').value,
     )
-
     this.createdOn = this.gemsService.getCreatedOn(this.form.get('createdOn').value);
     console.log("wat bewaren we in createdOn?", this.form.get('createdOn').value )
-
     this.form.reset({forSale: '', soldOut:'', createdOn: new Date()});
     // Save gem into database
     this.gemsService.newGem(gem).subscribe(data => {
       // Check if gemstone was saved to database or not
-      console.log(gem)
       if (!data.success) {
         this.messageClass = 'alert alert-danger'; // Return error class
         this.message = data.message; // Return error message
@@ -120,7 +116,6 @@ export class AddGemsComponent {
   }
 
   ngOnInit() {
-    this.gemsService.gems.subscribe(gemstones => this.gemstones = gemstones)
     this.getUser();
   }
 

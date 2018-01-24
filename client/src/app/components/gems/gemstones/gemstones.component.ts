@@ -42,31 +42,14 @@ export class GemstonesComponent implements OnInit {
     let target = event.target || event.srcElement || event.current.target;
     let idAttr = target.attributes.id;  
     let value = idAttr.nodeValue; 
-    let isClassVisible = true;
 
     if(this.isClickedId === undefined || null) {
-      console.log("clicked1: ", this.isClickedId)
-      console.log("a1: ", idAttr)
-      console.log("t1: ", target)
-      console.log("value: ", value)
       this.isAsc = true; 
-      //isClassVisible = true;
       console.log("isAsc1: ", this.isAsc)     
     } else if (this.isClickedId === idAttr) {
       this.isAsc = !this.isAsc; //change the direction
-      //isClassVisible = true;
-      console.log("clicked2: ", this.isClickedId)
-      console.log("a1: ", idAttr)
-      console.log("t2: ", target)
-      console.log("isAsc2: ", this.isAsc)
-      console.log("value: ", value)
     } else {
       this.isClickedId = idAttr;
-      
-      console.log("clicked3: ", this.isClickedId)
-      console.log("a1: ", idAttr)
-      console.log("isAsC: ", this.isAsc)
-      console.log("value: ", value)
     }
        
     if(this.isAsc){
@@ -78,16 +61,6 @@ export class GemstonesComponent implements OnInit {
     this.isClickedId = idAttr;
     
   }
-
-
-/*@Input('sort-direction')
-    sortDirection: string = '';
-
-    @HostListener('click')
-    sort() {
-        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-    }*/
-
 
   reloadGems() {
     this.loadingGems = true;
@@ -105,7 +78,7 @@ export class GemstonesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.gemsService.gems.subscribe(gemstones => this.gemstones = gemstones)
+    this.gemsService.createdOn.subscribe(createdOn => this.createdOn = createdOn);
     this.getAllGems();
     this.authService.getProfile().subscribe(profile => {
       this.username = profile.user.username; 
