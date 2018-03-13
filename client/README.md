@@ -51,18 +51,23 @@ Go to localhost:4200
 
 ## Seeing the functionalities in action:
 
-Register
+Register: 
 	To login, you need to register first. 
 	When registered, you will be redirected to login page.
-Login	
+
+Login: 
 	Login in will give you access to more functionalities. 
 	Navigation bar changes, when logged in.
-Profile
+
+Profile: 
 	When logged in, you will see the username and email, you have registered 	and used to log in.
-Add Gem
+
+Add Gem: 
 	You can add a gemstone, when you are logged in.  The new gemstone will 	appear in the gemstones page.
-Gemstones
+
+Gemstones: 
 	When logged in, you can edit or delete gemstones (only the ones you have created)
 	You can click on headings to sort the gemstones.
-Logout
+
+Logout: 
 	Navigation bar changes.
